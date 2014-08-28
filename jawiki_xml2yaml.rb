@@ -136,6 +136,7 @@ def check_category(line)
       splitter_pos = ret.index('|')
       ret = ret[0, splitter_pos]
     end
+    ret.strip!
   end
 
   ret
@@ -241,7 +242,7 @@ def check_external_link(line)
     url = 'http://' + url  if url !~ /^http/
     if url.include?(' ')
       splitter_pos = str.index(' ')
-      external_link['caption'] = url[splitter_pos + 1, url.size].strip
+      link['caption'] = url[splitter_pos + 1, url.size].strip
       url = url[0, splitter_pos]
     end
     link['url'] = url
@@ -250,7 +251,7 @@ def check_external_link(line)
       elem.strip!
       if elem =~ /^mobile\=/i
         # 当面、何もしない
-      elif elem =~ /^format\=/i
+      elsif elem =~ /^format\=/i
         # 当面、何もしない
       elsif elem =~ /^name\=/i
         link['caption'] = $'.strip
@@ -282,7 +283,7 @@ def check_external_link(line)
     url = 'http://' + url  if url !~ /^http/
     if url.include?(' ')
       splitter_pos = str.index(' ')
-      external_link['caption'] = url[splitter_pos + 1, url.size].strip
+      link['caption'] = url[splitter_pos + 1, url.size].strip
       url = url[0, splitter_pos]
     end
     link['url'] = url

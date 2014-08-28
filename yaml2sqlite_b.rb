@@ -76,8 +76,13 @@ begin
               if cat_article
                 category = Category.new(article_id: cat_article.id, child_article_id: child_article_id)
                 categories << category
-              else
-                print 'WARN: Category [', cat, '] does not exist.  (', y['title'], ")\n"
+              elsif cat != y['title']
+		cat_article = Article.find_by(title: cat)
+		if cat_article
+		  category = Category.new(article_id: cat_article.id, child_article_id: child_article_id)
+		else
+                  print 'WARN: Category [', cat, '] does not exist.  (', y['title'], ")\n"
+		end
               end
             end
           end
